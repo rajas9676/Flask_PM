@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Machine Failure Prediction Grid</title>
+    <style>
+        /* Tooltip */
+        .grid-item {
+            position: relative;
+        }
+        .grid-item:hover::before {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+        .grid-item:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .color-counts {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .color-count {
+            display: flex;
+            align-items: center;
+        }
+        .color-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .green { background-color: green; }
+        .yellow { background-color: yellow; }
+        .red { background-color: red; }
+        .color-label {
+            font-weight: bold;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .grid-item {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .green { background-color: green; color: white; }
+        .yellow { background-color: yellow; }
+        .red { background-color: red; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Machine Failure Prediction Grid for {{ button_clicked }} days</h2>
+        <div class="color-counts">
+            <div class="color-count">
+                <div class="color-indicator green"></div>
+                <div class="color-label">Safe: {{ green_count }}</div>
+            </div>
+            <div class="color-count">
+                <div class="color-indicator yellow"></div>
+                <div class="color-label">Warning: {{ yellow_count }}</div>
+            </div>
+            <div class="color-count">
+                <div class="color-indicator red"></div>
+                <div class="color-label">Critical: {{ red_count }}</div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            {% for item in grid_data %}
+                <div class="grid-item {{ item.color_code }}" title="Failure Probability: {{ item.failure_probability }}">
+                    {{ item.machine_id }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

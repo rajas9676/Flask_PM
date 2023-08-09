@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Machine Failure Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form button {
+            margin-bottom: 20px;
+        }
+        .styled-button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px auto;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+/* Hover effect */
+        .styled-button:hover {
+            background-color: #2980b9;
+        }
+        .color-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        .green { background-color: green; }
+        .yellow { background-color: yellow; }
+        .red { background-color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Machine Failure Prediction</h1>
+        <div class="form">
+            <form method="POST">
+                <label for="machine_id">Enter Machine ID: </label>
+                <input type="number" name="machine_id" required>
+                <button type="submit">Predict Individual</button>
+            </form>
+            <form action="/grid" method="GET" target="_blank">
+                <button type="submit" class="styled-button" name="prediction_button" value="30">30 day Failure Prediction</button>
+            </form>
+            <form action="/grid" method="GET" target="_blank">
+                <button type="submit" class="styled-button" name="prediction_button" value="20">20 day Failure Prediction</button>
+            </form>
+            <form action="/grid" method="GET" target="_blank">
+                <button type="submit" class="styled-button" name="prediction_button" value="10">10 day Failure Prediction</button>
+            </form>
+            {% if machine_id %}
+            <hr>
+            <p><b>Machine ID: </b>{{ machine_id }}</p>
+                <p><b>Failure Probability Percentage: </b>{{ probability }} <span class="color-indicator {{ color_code }}"></span></p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
