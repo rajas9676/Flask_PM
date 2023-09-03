@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RUL Grid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background-color: white;
+            padding: 10px;
+        }
+        .circle {
+            width: 60px; /* Adjust the circle size */
+            height: 60px; /* Adjust the circle size */
+            border-radius: 50%;
+            background-color: #3498db;
+            color: #ffffff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border: 2px solid #000; /* Add solid border */
+        }
+        .circle:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            border-top: 1px dotted #000; /* Change border style to dotted and color to black */
+        }
+        .rul-value {
+            font-size: 12px; /* Adjust the font size */
+            margin-bottom: 5px;
+        }
+        .engine-id {
+            font-size: 12px; /* Adjust the font size */
+            margin-top: 5px;
+        }
+        .red-bg {
+            background-color: red;
+        }
+        .yellow-bg {
+            background-color: yellow;
+            color: black; /* Change font color to black */
+        }
+        .green-bg {
+            background-color: green;
+        }
+        .count-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RUL Grid</h1>
+        <div class="count-row">
+            <div>Red: {{ rul_red_count }}</div>
+            <div>Yellow: {{ rul_yellow_count }}</div>
+            <div>Green: {{ rul_green_count }}</div>
+        </div>
+        <div class="grid">
+            {% for item in grid_data %}
+            <div class="circle {% if item.rul_result < 10 %}red-bg{% elif item.rul_result < 30 %}yellow-bg{% else %}green-bg{% endif %}">
+                <div class="rul-value">{{ item.rul_result }}</div>
+                <div class="engine-id">ID: {{ item.machine_id }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

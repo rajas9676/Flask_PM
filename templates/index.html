@@ -37,7 +37,26 @@
             transition: background-color 0.3s ease;
         }
 
-/* Hover effect */
+        .checkbox-label {
+            font-size: 16px; /* Adjust the font size as needed */
+            margin-left: 10px; /* Add spacing between the label and checkbox */
+        }
+
+        .styled-checkbox {
+            width: 20px; /* Increase the width of the checkbox */
+            height: 20px; /* Increase the height of the checkbox */
+            margin-left: 5px; /* Add spacing between the checkbox and label */
+            vertical-align: middle; /* Align the checkbox vertically with the label */
+        }
+
+        /* Style the checkbox when checked */
+        .styled-checkbox:checked {
+            background-color: #3498db; /* Change the background color when checked */
+            border: 2px solid #3498db; /* Add a border when checked */
+            border-radius: 3px; /* Add rounded corners when checked */
+        }
+
+        /* Hover effect */
         .styled-button:hover {
             background-color: #2980b9;
         }
@@ -60,7 +79,9 @@
             <form method="POST">
                 <label for="machine_id">Enter Machine ID: </label>
                 <input type="number" name="machine_id" required>
-                <button type="submit">Predict Individual</button>
+                <button type="submit">Predict Failure</button>
+                <input type="checkbox" name="calculate_rul" id="calculate_rul" class="styled-checkbox">
+                <label for="calculate_rul">Calculate RUL</label>
             </form>
             <form action="/grid" method="GET" target="_blank">
                 <button type="submit" class="styled-button" name="prediction_button" value="30">30 day Failure Prediction</button>
@@ -71,10 +92,18 @@
             <form action="/grid" method="GET" target="_blank">
                 <button type="submit" class="styled-button" name="prediction_button" value="10">10 day Failure Prediction</button>
             </form>
+            <form action="/rul_grid" method="GET" target="_blank">
+                <button type="submit" class="styled-button">RUL Calculator</button>
+            </form>
+
             {% if machine_id %}
             <hr>
             <p><b>Machine ID: </b>{{ machine_id }}</p>
-                <p><b>Failure Probability Percentage: </b>{{ probability }} <span class="color-indicator {{ color_code }}"></span></p>
+                <p><b>Alert Category: </b><span class="color-indicator {{ color_code }}"></span></p>
+                {% if rul %}
+                    <p><b>Remaining Useful Life(cycles): </b>{{ rul }}</p>
+                {% endif %}
+                <p><b>Failure Probability Percentage(next 30 cycles): </b>{{ probability }} </p>
             {% endif %}
         </div>
     </div>

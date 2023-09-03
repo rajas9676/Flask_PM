@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RUL Calculator</title>
+</head>
+<body>
+    <h1>RUL Calculator</h1>
+    <form method="POST" action="/calculate_rul">
+        <label for="engine_id">Enter Engine ID:</label>
+        <input type="number" name="engine_id" required>
+        <button type="submit">Calculate RUL</button>
+    </form>
+
+    <!-- Display RUL result here -->
+    {% if rul_result is defined %}
+    <p><b>RUL Prediction:</b> {{ rul_result }}</p>
+    {% endif %}
+</body>
+</html>
