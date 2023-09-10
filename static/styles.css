@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.form button {
+    margin-bottom: 20px;
+}
+.styled-button {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkbox-label {
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-left: 10px; /* Add spacing between the label and checkbox */
+}
+
+.styled-checkbox {
+    width: 20px; /* Increase the width of the checkbox */
+    height: 20px; /* Increase the height of the checkbox */
+    margin-left: 5px; /* Add spacing between the checkbox and label */
+    vertical-align: middle; /* Align the checkbox vertically with the label */
+}
+
+/* Style the checkbox when checked */
+.styled-checkbox:checked {
+    background-color: #3498db; /* Change the background color when checked */
+    border: 2px solid #3498db; /* Add a border when checked */
+    border-radius: 3px; /* Add rounded corners when checked */
+}
+
+/* Hover effect */
+.styled-button:hover {
+    background-color: #2980b9;
+}
+.color-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+.green { background-color: green; }
+.yellow { background-color: yellow; }
+.red { background-color: red; }
